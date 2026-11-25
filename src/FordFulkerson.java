@@ -20,24 +20,24 @@ public class FordFulkerson
 
     public double calcular(int origem, int destino)
     {
-        if (origem < 0 || origem >= n || destino < 0 || destino >= n || origem == destino)
-        {
-            System.err.println("Vertices de origem ou destino invalidos.");
-            return null;
-        }
-
-        if (!grafo.isDirecionado() || !grafo.isPonderado())
-        {
-            System.err.println("Ford-Fulkerson exige grafo direcionado e ponderado.");
-            return null;
-        }
-
         int n = grafo.getQuantidadeVertices();
         int[] anteriores = new int[n];
         double fluxoMaximo = 0;
         double[][] capacidade = new double[n][n];
         double[][] residual = new double[n][n]; // Matriz de capacidades residuais
         
+        if (origem < 0 || origem >= n || destino < 0 || destino >= n || origem == destino)
+        {
+            System.err.println("Vertices de origem ou destino invalidos.");
+            return -1;
+        }
+
+        if (!grafo.isDirecionado() || !grafo.isPonderado())
+        {
+            System.err.println("Ford-Fulkerson exige grafo direcionado e ponderado.");
+            return -1;
+        }
+
         // Inicializa a matriz de capacidades
         for (int i = 0; i < n; i++)
         {
@@ -49,7 +49,7 @@ public class FordFulkerson
                 if (peso < 0)
                 {
                     System.err.println("Capacidades nao podem ser negativas.");
-                    return null;
+                    return -1;
                 }
 
                 capacidade[i][destinoAresta] = peso;
@@ -89,7 +89,7 @@ public class FordFulkerson
 
             fluxoMaximo += fluxoCaminho;
         }
-        
+
         this.tempo = System.nanoTime() - this.tempo;
         return fluxoMaximo;
     }
