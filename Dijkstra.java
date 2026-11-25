@@ -5,10 +5,16 @@ import java.util.PriorityQueue;
 public class Dijkstra 
 {
     private Grafo grafo;
+    private long tempo;
 
     public Dijkstra(Grafo grafo) 
     {
         this.grafo = grafo;
+    }
+
+    public long tempo()
+    {
+        return this.tempo;
     }
 
     public double[] calcular(int origem) 
@@ -30,9 +36,10 @@ public class Dijkstra
         Arrays.fill(anteriores, -1);
         distancias[origem] = 0;
 
-
         PriorityQueue<int[]> fila = new PriorityQueue<>((a, b) -> Double.compare(distancias[a[0]], distancias[b[0]]));
         fila.add(new int[]{origem});
+
+        this.tempo = System.nanoTime();
 
         while (!fila.isEmpty()) 
         {
@@ -74,7 +81,7 @@ public class Dijkstra
                 }
             }
         }
-
+        this.tempo = System.nanoTime() - this.tempo;
         return distancias;
     }
 }

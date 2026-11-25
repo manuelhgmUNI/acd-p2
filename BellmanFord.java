@@ -4,10 +4,16 @@ import java.util.Arrays;
 public class BellmanFord
 {
     private Grafo grafo;
+    private long tempo;
 
     public BellmanFord(Grafo grafo)
     {
         this.grafo = grafo;
+    }
+
+    public long tempo()
+    {
+        return this.tempo;
     }
 
     public double[] calcular(int origem)
@@ -25,6 +31,8 @@ public class BellmanFord
         Arrays.fill(distancias, Double.POSITIVE_INFINITY);
 
         distancias[origem] = 0;
+
+        this.tempo = System.nanoTime();
 
         // arestas N - 1 vezes
         for (int i = 0; i < n - 1; i++)
@@ -82,7 +90,7 @@ public class BellmanFord
                 }
             }
         }
-
+        this.tempo = System.nanoTime() - this.tempo;
         return distancias;
     }
 }
