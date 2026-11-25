@@ -2,10 +2,16 @@
 public class FloydWarshall
 {
     private Grafo grafo;
+    private long tempo;
 
     public FloydWarshall(Grafo grafo)
     {
         this.grafo = grafo;
+    }
+
+    public long tempo()
+    {
+        return this.tempo;
     }
 
     public double[][] calcular()
@@ -45,6 +51,10 @@ public class FloydWarshall
             }
         }
 
+        // começo
+        this.tempo = System.nanoTime();
+
+
         // Algoritmo Floyd-Warshall
         for (int k = 0; k < n; k++)
         {
@@ -52,8 +62,7 @@ public class FloydWarshall
             {
                 for (int j = 0; j < n; j++)
                 {
-                    if (distancias[i][k] != Double.POSITIVE_INFINITY &&
-                        distancias[k][j] != Double.POSITIVE_INFINITY)
+                    if (distancias[i][k] != Double.POSITIVE_INFINITY && distancias[k][j] != Double.POSITIVE_INFINITY)
                     {
                         double novaDistancia =
                             distancias[i][k] + distancias[k][j];
@@ -67,6 +76,7 @@ public class FloydWarshall
                 }
             }
         }
+        this.tempo = System.nanoTime() - this.tempo;
 
         // Verifica a existencia de ciclos negativos
         for (int i = 0; i < n; i++)
