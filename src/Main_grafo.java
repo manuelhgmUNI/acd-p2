@@ -6,35 +6,59 @@ public class Main_grafo
         int exatidção = 10; // numero de vezes q os algoritimos vão ser executados pra poder fazer uma média
         int alg_num = 9; // numero de algoritimos
         int ponderado = 2; // se 0 o grafo n é ponderado se 1 grafo ponderado 
-        long[][][][] tempos = new long[alg_num][2][ponderado][exatidção]; // o [2] aqui é pra diferenciar da lista e da matriz
-    
+        long[][][][][] tempos = new long[alg_num][2][2][ponderado][exatidção]; // o [2] aqui é pra diferenciar da lista e da matriz e o outro é direcionado e n derecionado
+        
+        int tam_max;
+        if (args.length > 1)
+            tam_max = Integer.parseInt(args[1]);
+        else 
+            tam_max = 100;
+        
+        if (tam_max % 10 != 0)
+            System.err.println("entrada: "+tam_max+"\nporem o segundo termo tem q ser multiplo de 10");
+
+        // =======================================================================================================
+        // execução
+        
         for (int i = 0; i < exatidção; i++)
         {
-            for (int j = 0; j < 2; j++)
+            for (int j = 0; j < ponderado; j++)
             {
-                if (j == 0) // adjacencia
+                boolean bpon = false; // n ponderado
+                if (j == 0) // ponderado
                 {
-                    
+                    bpon = true;
                 }
-                else // matriz
+
+                for (int k = 0; k < 2; k++)
                 {
-
-                }
-                for (int k = 0; k < ponderado; k++)
-                {
-                    if (k == 0) // n ponderado
+                    boolean bdir = false; // n direcionado
+                    if (k == 1) // direcionado
                     {
-                        
+                        bdir = true;
                     }
-                    else // ponderado
+                    for (int l = 0; l < 2; l++)
                     {
+                        for (int tam = 1 ; tam <= tam_max; tam *= 10)
+                        {
 
+                            Grafo grafo;
+                            if (l == 0) // lista
+                            {
+                                grafo = new GrafoListaAdjacencia(tam, bdir, bpon);
+                            }
+                            else // matriz
+                            {
+                                grafo = new GrafoMatrizAdjacencia(tam, bdir, bpon);
+                            }
+                            
+                            int alg_cont = 0;
+                            
+                            
+                            
+                            
+                        }
                     }
-                    int alg_cont = 0;
-
-                    
-
-
                 }
             }
         }
