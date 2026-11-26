@@ -4,10 +4,44 @@ public class Main_grafo
     public static void main(String[] args) 
     {
         int exatidção = 10; // numero de vezes q os algoritimos vão ser executados pra poder fazer uma média
-        int alg_num = 7; // numero de algoritimos
-        long[][][] tempos = new long[alg_num][2][exatidção]; // o [2] aqui é pra diferenciar da lista e da matriz
+        int alg_num = 9; // numero de algoritimos
+        int ponderado = 2; // se 0 o grafo n é ponderado se 1 grafo ponderado 
+        long[][][][] tempos = new long[alg_num][2][ponderado][exatidção]; // o [2] aqui é pra diferenciar da lista e da matriz
     
+        for (int i = 0; i < exatidção; i++)
+        {
+            for (int j = 0; j < 2; j++)
+            {
+                if (j == 0) // adjacencia
+                {
+                    
+                }
+                else // matriz
+                {
+
+                }
+                for (int k = 0; k < ponderado; k++)
+                {
+                    if (k == 0) // n ponderado
+                    {
+                        
+                    }
+                    else // ponderado
+                    {
+
+                    }
+                    int alg_cont = 0;
+
+                    
+
+
+                }
+            }
+        }
         
+
+
+
 
         // parte antiga
         int test = 0;
