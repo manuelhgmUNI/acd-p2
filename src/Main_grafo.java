@@ -6,8 +6,6 @@ public class Main_grafo
         int exatidção = 10; // numero de vezes q os algoritimos vão ser executados pra poder fazer uma média
         int alg_num = 9; // numero de algoritimos
         int ponderado = 2; // se 0 o grafo n é ponderado se 1 grafo ponderado 
-        long[][][][][] tempos = new long[alg_num][2][2][ponderado][exatidção]; // o [2] aqui é pra diferenciar da lista e da matriz e o outro é direcionado e n derecionado
-        
         int tam_max;
         if (args.length > 1)
             tam_max = Integer.parseInt(args[1]);
@@ -17,6 +15,9 @@ public class Main_grafo
         if (tam_max % 10 != 0)
             System.err.println("entrada: "+tam_max+"\nporem o segundo termo tem q ser multiplo de 10");
 
+        int tam_vector = tam_max/10;
+        long[][][][][][] tempos = new long[alg_num][2][2][ponderado][exatidção][tam_vector]; // o [2] aqui é pra diferenciar da lista e da matriz e o outro é direcionado e n derecionado
+        
         // =======================================================================================================
         // execução
         
@@ -39,8 +40,10 @@ public class Main_grafo
                     }
                     for (int l = 0; l < 2; l++)
                     {
-                        for (int tam = 1 ; tam <= tam_max; tam *= 10)
+                        for (int tam = 10 ; tam <= tam_max; tam *= 10)
                         {
+                            int tindex = tam/10;
+                            tindex -= 1;
 
                             Grafo grafo;
                             if (l == 0) // lista
@@ -51,8 +54,49 @@ public class Main_grafo
                             {
                                 grafo = new GrafoMatrizAdjacencia(tam, bdir, bpon);
                             }
+                            /*
+                            // obrigatorios
+                            0 = dijk
+                            1 = bell
                             
+                            // opicionais
+                            2 = floyd
+                            3 = ford
+                            4 = bfs
+                            5 = dfs
+                            6 = topo
+                            7 = krus
+                            8 = prim
+                            */
                             int alg_cont = 0;
+                            
+                            // 0
+                            Dijkstra dijkstra = new Dijkstra(grafo);
+                            dijkstra.calcular(0);
+                            tempos[alg_cont][l][k][j][i][tindex] = dijkstra.tempo();
+
+                            // 1
+                            BellmanFord bellmanFord = new BellmanFord(grafo);
+                            bellmanFord.calcular(0);
+                            tempos[alg_cont][l][k][j][i][tindex] = bellmanFord.tempo();
+
+                            /*
+                            // 2
+                            FloydWarshall floydWarshall = new FloydWarshall(grafo);
+                            floydWarshall.calcular();
+                            tempos[alg_cont][l][k][j][i][tindex] = floydWarshall.tempo();
+                            
+                            // 3
+                            FordFulkerson fordFulkerson = new FordFulkerson(grafo);
+                            fordFulkerson.calcular(0, i);
+                            tempos[alg_cont][l][k][j][i][tindex] = dijkstra.tempo();
+                            */
+
+                            
+
+
+
+
                             
                             
                             
